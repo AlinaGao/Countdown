@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,user-scalable=no" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="x5-orientation" content="portrait">
+		<meta name="x5-fullscreen" content="true">
+		<meta name="screen-orientation" content="portrait">
+		<meta name="full-screen" content="yes">
+		<title>定时器</title>
+		<script>
+			setSize();
+			window.addEventListener("resize",setSize,false);
+			window.addEventListener("orientationchange",setSize,false);
+			function setSize()
+			{
+				var oHtml=document.getElementsByTagName("html")[0];
+				var iWidth=oHtml.getBoundingClientRect().width;
+				oHtml.style.fontSize=iWidth/16+"px";
+			}
+		</script>
+		<script type="text/javascript" src="js/touchScroll.js" ></script>
+		<script>
+			//console.log(Math.tan(72*Math.PI/180)*50);		//153.88417685876263
+			
+			window.onload = function(){
+				var box = document.getElementsByClassName("box")[0];
+				var scale = 2;
+				setLayout();
+				var Scroll = new MScroll(box,"y",false,true,true);
+				//定义距离、时间、距离差、时间差
+				var last = 0;
+				var lastTime = 0;
+				var lastDis = 0;
+				var lastTimeDis = 0;
+				
+				Scroll.onscrollstart=function(){
+					lastTime = new Date().getTime();
+					last = this.iScroll;
+					lastDis =0;
+				}
+				
+				Scroll.onscroll=function(){
+					//iScroll滑动距离,oScroll滑动对象
+					//var deg = -this.iScroll/scale;		//调节速度
+					var deg = -this.iScroll;
+					//console.log(this.oScroll);
+					//console.log(deg);
+					this.oScroll.style.transform=this.oScroll.style.WebkirTransform="rotateX("+deg+"deg)";
+					
+					var nowTime = new Date().getTime();
+					
+					lastTimeDis = nowTime - lastTime;
+					lastDis = this.iScroll - last;
+					last = this.iScroll;
+				}
+				
+				Scroll.onscrollend=function(){
+					clearInterval(this.timer);
+					//定义滑动速度差dis、目标速度target、当前速度now
+					var dis = (lastDis / lastTimeDis)*200;
+					var target = -(dis + this.iScroll);
+					var now = Math.round(target/36);	//取整，使滑动后定位准正中
+					dis = -now*36 - this.iScroll;
+					console.log(now);
+					this.tweenMove(dis,"easeOut");
+				}
+			}
+			
+			//1.布局
+			function setLayout(){
+				var div = document.getElementsByClassName("div")[0];
+				var str = "";
+				for (i=0; i<10; i++) {
+					str = "<div><span>" +(9-i)+ "</span>" +str+ "</div>";
+				}
+				div.innerHTML = str;
+			}
+		</script>
+		<style>
+			/*
+			 正n边形外角和 = 360
+			 正n边形外角 = 360/n
+			 1.正切函数接收的是一个弧度 tan? = 对边/领边
+			 2.角度转弧度 deg*Math.PI/180
+			 * */
+			html,body{
+				height: 100%;
+				overflow: hidden;
+				margin: 0;
+				}
+			.box{
+				width: 100px;
+				height: 100px;
+				margin: 150px auto;
+				perspective: 800px;
+				-webkit-perspective: 800px;
+				padding: 0 100px;
+				border: 1px solid #000000;
+			}
+			.div{
+				width: 100px;
+				height: 100px;
+				position: relative;
+				transform-style:preserve-3d ;
+				-webkit-transform-style:preserve-3d ;
+				transform-origin: center center -153px;
+				-webkit-transform-origin: center center -153px;
+			}
+			.div div{
+				position: absolute;
+				left: 0;
+				top: 100px;
+				transform-style:preserve-3d ;
+				-webkit-transform-style:preserve-3d ;
+				transform-origin: top;
+				-webkit-transform-origin: top;
+				transform: rotateX(-36deg);
+				-webkit-transform: rotateX(-36deg);
+			}
+			.div>div{			/*第一个div*/
+				top:0;
+				transform: rotateX(0deg);
+				-webkit-transform: rotateX(0deg);
+			}
+			.div span{
+				width: 98px;
+				height: 98px;
+				border: 1px solid #000;
+				background-color: #ccc;
+				text-align: center;
+				font: 50px/98px "宋体" ;
+				display: block;
+			}
+			
+			
+		</style>
+		<!--//滑动函数
+		<script>
+			window.onload = function(){
+				var Scroll = new MScroll("box","y",true,false,true); //滑动对象,纵向，是否显示滚动条,位移,阻止移动
+				Scroll.onscrollstart=function(){		//开始滑动
+					console.log("开始移动");
+				};
+				Scroll.onscroll=function(){			//滑动距离
+					console.log(this.iScroll);
+				};
+				Scroll.onscrollend=function(){		//滑动结束
+					console.log("结束移动");
+					clearInterval(this.timer);		//禁止滑动结束后延时的动作
+				};
+			};
+		</script>-->
+	</head>
+	<body>
+		<div class="box">
+			<div class="div">
+				
+			</div>
+		</div>
+		
+	</body>
+</html>

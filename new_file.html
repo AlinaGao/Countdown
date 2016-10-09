@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#div{
+				width: 100px;
+				height: 100px;
+				border: 1px solid #000000;
+				position: relative;
+				background: #FFFFFF;
+			}
+			#div:before{
+				width: 0;
+				height: 0;
+				content: "";
+				border: 11px solid transparent;
+				position: absolute;
+				left: 100px;
+				top: 20px;
+				border-width: 10px;
+				border-left-color: #FFFFFF;
+				top: 19px;
+				border-width: 11px;
+				border-left-color: #000;
+			}
+			#div:after{
+				width: 0;
+				height: 0;
+				content: "";
+				border:  solid transparent;
+				position: absolute;
+				left: 100px;
+				top: 20px;
+				border-width: 10px;
+				border-left-color: #FFFFFF;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="div"></div>
+	</body>
+</html>

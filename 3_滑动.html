@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,user-scalable=no" />
+<title>无标题文档</title>
+<style>
+#box {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	overflow: hidden;
+}
+#div {
+	width: 1000px;
+}
+</style>
+<script src="js/touchScroll.js"></script>
+<script>
+
+window.onload = function(){
+	var Scroll = new MScroll("box","y",true,false,true); //滑动对象,纵向，是否显示滚动条,,阻止移动
+	Scroll.onscrollstart=function(){		//开始滑动
+		console.log("开始移动");
+	};
+	Scroll.onscroll=function(){			//滑动距离
+		console.log(this.iScroll);
+	};
+	Scroll.onscrollend=function(){		//滑动结束
+		console.log("结束移动");
+		clearInterval(this.timer);		//禁止滑动结束后延时的动作
+	};
+};
+
+</script>
+</head>
+<body>
+<div id="box">
+	<div id="div">
+    	页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+        页面内容<br />
+    </div>
+</div>
+</body>
+</html>
